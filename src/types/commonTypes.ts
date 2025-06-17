@@ -1,7 +1,7 @@
 export type Currency = 'BTC' | 'ETH' | 'SOL'
 
 export interface ExchangeRate {
-  [key: string]: number
+  [key: string]: { usd?: number }
 }
 
 export interface ExchangeBase {

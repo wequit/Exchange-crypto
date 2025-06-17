@@ -1,5 +1,4 @@
-import type { Currency, ExchangeBase } from '../../types/commonTypes'
-import type { ExchangeRate } from '../../types/commonTypes'
+import type { Currency, ExchangeBase, ExchangeRate } from '../../types/commonTypes'
 
 export interface ExchangeCardProps extends ExchangeBase {
   onFromChange: (value: string) => void

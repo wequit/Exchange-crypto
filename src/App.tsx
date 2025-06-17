@@ -1,6 +1,6 @@
 import { Route, Routes, Link } from 'react-router-dom'
 import { ExchangeView } from './views/ExchangeView/ExchangeView'
-import { ExchangeProvider } from './contexts/ExchangeContext'
+import { ExchangeProvider } from './contexts/ExchangeProvider'
 // import AboutView from './views/AboutView/AboutView'
 
 export default function App() {

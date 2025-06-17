@@ -3,13 +3,13 @@ import { Input } from '../ui/Input'
 import { Button } from '../ui/Button'
 import type { ExchangeCardProps } from './types'
 import type { Currency } from '../../types/commonTypes'
+import { SearchCoin } from './parts/SearchCoin'
 
 export const ExchangeCard: React.FC<ExchangeCardProps> = ({
   fromAmount,
   toAmount,
   onFromChange,
   onSwap,
-  currencies,
   fromCurrency,
   toCurrency,
   onFromCurrencyChange,
@@ -18,8 +18,10 @@ export const ExchangeCard: React.FC<ExchangeCardProps> = ({
   rates
 }) => {
   const rate = React.useMemo(() => {
-    if (!rates || !rates[fromCurrency] || !rates[toCurrency]) return null;
-    return (rates[fromCurrency] / rates[toCurrency]).toFixed(6);
+    const fromRate = rates[fromCurrency]?.usd;
+    const toRate = rates[toCurrency]?.usd;
+    if (!fromRate || !toRate) return null;
+    return (fromRate / toRate).toFixed(6);
   }, [rates, fromCurrency, toCurrency]);
 
   return (
@@ -42,15 +44,10 @@ export const ExchangeCard: React.FC<ExchangeCardProps> = ({
               className="text-2xl font-medium bg-transparent border-none focus:ring-0 p-0"
               placeholder="0.0"
             />
-            <select
-              className="bg-gray-700 text-white px-3 py-2 rounded-lg text-sm font-medium cursor-pointer hover:bg-gray-600 transition-colors"
+            <SearchCoin
               value={fromCurrency}
-              onChange={(e) => onFromCurrencyChange(e.target.value as Currency)}
-            >
-              {currencies.map((cur) => (
-                <option key={cur} value={cur}>{cur}</option>
-              ))}
-            </select>
+              onSelect={(coin) => onFromCurrencyChange(coin.symbol as Currency)}
+            />
           </div>
         </div>
 
@@ -78,15 +75,10 @@ export const ExchangeCard: React.FC<ExchangeCardProps> = ({
               className="text-2xl font-medium bg-transparent border-none focus:ring-0 p-0 text-blue-400"
               placeholder="0.0"
             />
-            <select
-              className="bg-gray-700 text-white px-3 py-2 rounded-lg text-sm font-medium cursor-pointer hover:bg-gray-600 transition-colors"
+            <SearchCoin
               value={toCurrency}
-              onChange={(e) => onToCurrencyChange(e.target.value as Currency)}
-            >
-              {currencies.map((cur) => (
-                <option key={cur} value={cur}>{cur}</option>
-              ))}
-            </select>
+              onSelect={(coin) => onToCurrencyChange(coin.symbol as Currency)}
+            />
           </div>
         </div>
       </div>

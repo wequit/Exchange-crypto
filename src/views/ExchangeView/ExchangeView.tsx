@@ -1,6 +1,6 @@
 import React from 'react';
 import { ExchangeCard } from '../../components/ExchangeCard/ExchangeCard';
-import { useExchange } from '../../contexts/ExchangeContext';
+import useExchange  from '../../contexts/useExchange';
 import type { Currency } from '../../types/commonTypes';
 import { currencies } from '../../models/exchange.model';
 

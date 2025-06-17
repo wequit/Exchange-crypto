@@ -1,7 +1,7 @@
-import type { Currency, ExchangeBase } from '../types/commonTypes'
+import type { Currency, ExchangeBase, ExchangeRate } from '../types/commonTypes'
 
 export interface ExchangeContextType extends ExchangeBase {
-  rates: Record<string, number>
+  rates: ExchangeRate
   setFromAmount: (amount: string) => void
   setFromCurrency: (currency: Currency) => void
   setToCurrency: (currency: Currency) => void

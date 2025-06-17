@@ -1,10 +1,9 @@
-    // tailwind.config.js
     export default {
         content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
         theme: {
             extend: {
             fontFamily: {
-                sans: ['Inter', 'sans-serif'], // или 'Roboto'
+                sans: ['Inter', 'sans-serif'],
             },
             colors: {
                 primary: {
