@@ -1,4 +1,4 @@
-import type { Currency, ExchangeBase, ExchangeRate } from '../types/commonTypes'
+import type { Currency, ExchangeBase, ExchangeRate } from '../../types/commonTypes'
 
 export interface ExchangeContextType extends ExchangeBase {
   rates: ExchangeRate
@@ -7,4 +7,6 @@ export interface ExchangeContextType extends ExchangeBase {
   setToCurrency: (currency: Currency) => void
   swapCurrencies: () => void
   fetchRates: () => Promise<void>
-} 
+  getRate: () => string | null
+}
+

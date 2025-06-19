@@ -4,6 +4,8 @@ import { Button } from '../ui/Button'
 import type { ExchangeCardProps } from './types'
 import type { Currency } from '../../types/commonTypes'
 import { SearchCoin } from './parts/SearchCoin'
+import { useContext } from 'react'
+import ExchangeContext from '../../contexts/ExchangeContext/ExchangeContext'
 
 export const ExchangeCard: React.FC<ExchangeCardProps> = ({
   fromAmount,
@@ -15,14 +17,9 @@ export const ExchangeCard: React.FC<ExchangeCardProps> = ({
   onFromCurrencyChange,
   onToCurrencyChange,
   onTransfer,
-  rates
 }) => {
-  const rate = React.useMemo(() => {
-    const fromRate = rates[fromCurrency]?.usd;
-    const toRate = rates[toCurrency]?.usd;
-    if (!fromRate || !toRate) return null;
-    return (fromRate / toRate).toFixed(6);
-  }, [rates, fromCurrency, toCurrency]);
+  const { getRate } = useContext(ExchangeContext)!;
+  const rate = getRate();
 
   return (
     <div className=" bg-gradient-to-br from-gray-900 to-gray-800 p-8 rounded-3xl w-96 text-white shadow-2xl border border-gray-700 backdrop-blur-sm">
@@ -31,11 +28,10 @@ export const ExchangeCard: React.FC<ExchangeCardProps> = ({
       </h2>
 
       <div className="space-y-6">
-        {/* From Currency */}
+        {/* Первая валюта */}
         <div className="bg-gray-800/50 p-4 rounded-xl border border-gray-700 hover:border-cyan-400/30 transition-all">
           <div className="flex justify-between items-center mb-2">
             <label className="text-sm text-gray-400">You pay</label>
-            <span className="text-xs text-gray-500">Balance: 0.0</span>
           </div>
           <div className="flex items-center gap-3">
             <Input
@@ -51,7 +47,7 @@ export const ExchangeCard: React.FC<ExchangeCardProps> = ({
           </div>
         </div>
 
-        {/* Swap Button */}
+        {/* Свап */}
         <button
           onClick={onSwap}
           className="mx-auto flex items-center justify-center w-10 h-10 rounded-full bg-gray-700 hover:bg-cyan-500/10 border border-gray-600 hover:border-cyan-400/50 text-cyan-400 hover:text-cyan-300 transition-all"
@@ -62,11 +58,10 @@ export const ExchangeCard: React.FC<ExchangeCardProps> = ({
           </svg>
         </button>
 
-        {/* To Currency */}
+        {/* Вторая валют */}
         <div className="bg-gray-800/50 p-4 rounded-xl border border-gray-700 hover:border-blue-400/30 transition-all">
           <div className="flex justify-between items-center mb-2">
             <label className="text-sm text-gray-400">You receive</label>
-            <span className="text-xs text-gray-500">Balance: 0.0</span>
           </div>
           <div className="flex items-center gap-3">
             <Input
