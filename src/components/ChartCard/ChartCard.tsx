@@ -1,6 +1,5 @@
 import React, { useContext, useRef, useMemo } from 'react'
 import { Line } from 'react-chartjs-2'
-
 import 'chartjs-adapter-date-fns'
 import ChartContext from '../../contexts/ChartContext/ChartContext'
 import { buildChartData, CHART_COINS, CHART_PERIODS, getChartOptions } from '../../models/chart.model'
